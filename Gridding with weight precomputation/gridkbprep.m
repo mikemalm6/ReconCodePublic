@@ -74,19 +74,6 @@ else
 	overgridfactor = 1.5;
 end
 
-% ======= Try to load the parameters from file, if already created =======
-try
-% create filename that would be saved
-tit = recon_makeGridPrepTitle();
-
-% see if filename has already been saved
-d = pwd;
-cd /v/raid10/users/mmalmberg/GithubCode/ReconCode/mmalmCode/Gridding/GriddingWeights_PreCalc
-load(tit);
-cd(d);
-
-% load if so
-catch
 % ========== Calculate Kaiser-Bessel Kernel for given parameters =========
 
 [kerneltable,u] = calckbkernel(kwidth,overgridfactor);
@@ -97,7 +84,6 @@ catch
 
 [indxminAll,indxmaxAll, indyminAll, indymaxAll,wts] = gridprep(ktraj,gridsize,kwidth/2, kerneltable);
 
-end
 kbkval = kerneltable;		% ---- Assign output value.
 kbku = u;			% ---- Assign output value.
 
